@@ -4,7 +4,8 @@ Rails.application.routes.draw do
       get 'sessions', to: 'sessions#create'
       post 'home', to: 'users#create'
       get 'current_user', to: 'logins#show'
-      
+
+      post 'fetch_user', to: 'users#show'
     end
   end
 end
