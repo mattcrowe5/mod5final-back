@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       get 'current_user', to: 'logins#show'
 
       post 'fetch_user', to: 'users#show'
+      post 'top_tracks', to: 'top_tracks#create'
     end
   end
 end
