@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
       post 'fetch_user', to: 'users#show'
       post 'top_tracks', to: 'top_tracks#create'
+      post 'top_artists', to: 'artists#create'
     end
   end
 end
