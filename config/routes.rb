@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       post 'top_tracks', to: 'top_tracks#create'
       post 'top_artists', to: 'artists#create'
       post 'related_artists', to: 'artists#show'
+      post 'shows', to: 'shows#show'
     end
   end
 end
