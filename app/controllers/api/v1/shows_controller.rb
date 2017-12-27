@@ -12,9 +12,11 @@ class Api::V1::ShowsController < ApplicationController
       shows = JSON.parse(shows_hash)["resultsPage"]['results']['event']
       if shows != nil
         filtered_shows = shows.map do |show|
-          {concert: show["displayName"], date: show["start"]["date"], time: show["start"]["time"], link: show['uri'], artist: show['performance'][0]['displayName']}
+          if show['venue']['metroArea']['displayName'] === params['city']
+            {concert: show["displayName"], date: show["start"]["date"], time: show["start"]["time"], link: show['uri'], artist: show['performance'][0]['displayName']}
+          end
         end
-        @concerts.concat(filtered_shows)
+        @concerts.concat(filtered_shows.compact)
       end
 
     end
