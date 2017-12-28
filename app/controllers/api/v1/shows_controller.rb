@@ -5,7 +5,7 @@ class Api::V1::ShowsController < ApplicationController
 
     @concerts = []
     params['related_artists'].each do |artist|
-      artist_hash = RestClient.get("https://api.songkick.com/api/3.0/search/artists.json?apikey=#{ENV["SONG_KEY"]}&query=#{artist}")
+      artist_hash = RestClient.get("https://api.songkick.com/api/3.0/search/artists.json?apikey=#{ENV["SONG_KEY"]}&query=#{artist['name']}")
       related_artists_params = JSON.parse(artist_hash.body)
       id = related_artists_params['resultsPage']['results']['artist'][0]["id"]
       shows_hash = RestClient.get("https://api.songkick.com/api/3.0/artists/#{id}/calendar.json?apikey=#{ENV["SONG_KEY"]}")
@@ -13,7 +13,7 @@ class Api::V1::ShowsController < ApplicationController
       if shows != nil
         filtered_shows = shows.map do |show|
           if show['venue']['metroArea']['displayName'] === params['city']
-            {concert: show["displayName"], date: show["start"]["date"], time: show["start"]["time"], link: show['uri'], artist: show['performance'][0]['displayName']}
+            {concert: show["displayName"], date: show["start"]["date"], time: show["start"]["time"], link: show['uri'], artist: show['performance'][0]['displayName'], photo: artist['photo']}
           end
         end
         @concerts.concat(filtered_shows.compact)

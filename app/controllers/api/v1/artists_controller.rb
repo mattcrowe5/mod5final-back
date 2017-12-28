@@ -21,7 +21,7 @@ class Api::V1::ArtistsController < ApplicationController
     related_artists_response = RestClient.get("https://api.spotify.com/v1/artists/#{params['artist_id']}/related-artists", header)
     related_artists_params = JSON.parse(related_artists_response.body)
     artist_names = related_artists_params["artists"].map do |artist|
-      artist["name"]
+      {name: artist["name"], photo: artist['images'][0]['url']}
     end
 
     artist_names = artist_names.slice(0,8)
