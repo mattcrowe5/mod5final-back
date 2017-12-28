@@ -1,3 +1,4 @@
+require 'time'
 class Api::V1::ShowsController < ApplicationController
 
   def show
@@ -13,7 +14,7 @@ class Api::V1::ShowsController < ApplicationController
       if shows != nil
         filtered_shows = shows.map do |show|
           if show['venue']['metroArea']['displayName'] === params['city']
-            {concert: show["displayName"], date: show["start"]["date"], time: show["start"]["time"], link: show['uri'], artist: show['performance'][0]['displayName'], photo: artist['photo']}
+            {concert: show["displayName"], date: Time.parse(show["start"]["date"]).strftime("%m/%d/%y"), time: Time.parse(show["start"]["time"]).strftime("%l %P"), link: show['uri'], artist: show['performance'][0]['displayName'], photo: artist['photo']}
           end
         end
         @concerts.concat(filtered_shows.compact)
