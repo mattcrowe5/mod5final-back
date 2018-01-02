@@ -21,7 +21,7 @@ class Api::V1::ShowsController < ApplicationController
       end
 
     end
-    # binding.pry
+
 
     # making the fetch request to the spotify api and parsing it
     render json: {shows: @concerts}
