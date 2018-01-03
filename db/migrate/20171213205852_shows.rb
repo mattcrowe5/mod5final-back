@@ -3,9 +3,10 @@ class Shows < ActiveRecord::Migration[5.1]
     create_table :shows do |t|
       t.string :venue
       t.string :date
-      t.string :image
-      t.string :address
+      t.string :time
+      t.string :name
       t.string :link
+      t.string :artist
     end
   end
 end
