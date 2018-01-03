@@ -3,8 +3,7 @@ class Api::V1::ArtistsController < ApplicationController
     decoded = JWT.decode(my_user.access_token, ENV["MY_SECRET"], ENV["EGGS"])
     # taking the access token stored in user and decoding it
 
-
-    header = {'Authorization': "Bearer " + decoded[0]["access_token"]}
+    header = {'Authorization': "Bearer " + decoded[0]["token"]}
     # iterating through decoded to get to the access token and passing it into the header
     top_artists_response = RestClient.get("https://api.spotify.com/v1/me/top/artists", header)
     top_artists_params = JSON.parse(top_artists_response.body)
@@ -16,7 +15,7 @@ class Api::V1::ArtistsController < ApplicationController
   def show
     decoded = JWT.decode(my_user.access_token, ENV["MY_SECRET"], ENV["EGGS"])
     # taking the access token stored in user and decoding it
-    header = {'Authorization': "Bearer " + decoded[0]["access_token"]}
+    header = {'Authorization': "Bearer " + decoded[0]["token"]}
     # iterating through decoded to get to the access token and passing it into the header
     related_artists_response = RestClient.get("https://api.spotify.com/v1/artists/#{params['artist_id']}/related-artists", header)
     related_artists_params = JSON.parse(related_artists_response.body)
