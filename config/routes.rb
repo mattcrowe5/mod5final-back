@@ -10,6 +10,9 @@ Rails.application.routes.draw do
       post 'top_artists', to: 'artists#create'
       post 'related_artists', to: 'artists#show'
       post 'shows', to: 'shows#show'
+      post 'save_show', to: 'shows#create'
+      post 'remove_show', to: 'users#update'
+      post 'index', to: 'users#index'
     end
   end
 end

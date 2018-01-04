@@ -28,4 +28,8 @@ class Api::V1::ArtistsController < ApplicationController
     render json: {related_artists: artist_names, city: params['city']}
     # rendering to the back end so the front end can take in the data
   end
+
+  def update
+    binding.pry
+  end
 end

@@ -79,6 +79,17 @@ class Api::V1::UsersController < ApplicationController
     render json: {currentUser: serialized_user, code: jwt}
   end
 
+  def update
+    show = Show.find_or_create_by(show_params)
+    user_id = JWT.decode(params["token"], ENV["MY_SECRET"], ENV["EGGS"])[0]["user_id"]
+    @user = User.find_by(id: user_id)
+
+    @user.shows.delete(show)
+
+    render json: @user.shows
+
+  end
+
   private
   def user_with_token(user)
     payload = {user_id: user.id}
