@@ -85,7 +85,6 @@ class Api::V1::UsersController < ApplicationController
     @user = User.find_by(id: user_id)
 
     @user.shows.delete(show)
-    binding.pry
 
     render json: @user.shows
 
