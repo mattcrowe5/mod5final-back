@@ -6,9 +6,11 @@ class Api::V1::ShowsController < ApplicationController
     user_id = JWT.decode(params["token"], ENV["MY_SECRET"], ENV["EGGS"])[0]["user_id"]
     @user = User.find_by(id: user_id)
 
-    @user.shows << show
-    @user.save
-    binding.pry
+    if !@user.shows.include?(show)
+      @user.shows << show
+      @user.save
+    end
+
 
     render json: @user.shows
 
@@ -50,6 +52,7 @@ class Api::V1::ShowsController < ApplicationController
       name: params["show"]["concert"],
       link: params["show"]["link"],
       artist: params["show"]["artist"],
+      photo: params["show"]["photo"]
     }
   end
 

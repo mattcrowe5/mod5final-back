@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20180103204624) do
     t.string "name"
     t.string "link"
     t.string "artist"
+    t.string "photo"
   end
 
   create_table "user_shows", force: :cascade do |t|

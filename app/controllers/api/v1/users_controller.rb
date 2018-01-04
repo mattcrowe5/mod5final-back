@@ -85,9 +85,17 @@ class Api::V1::UsersController < ApplicationController
     @user = User.find_by(id: user_id)
 
     @user.shows.delete(show)
+    binding.pry
 
     render json: @user.shows
 
+  end
+
+  def index
+    user_id = JWT.decode(params["token"], ENV["MY_SECRET"], ENV["EGGS"])[0]["user_id"]
+    @user = User.find_by(id: user_id)
+
+    render json: @user.shows
   end
 
   private
@@ -106,6 +114,18 @@ class Api::V1::UsersController < ApplicationController
       spotify_url: user_data["external_urls"]["spotify"],
       href: user_data["href"],
       uri: user_data["uri"]
+    }
+  end
+
+  def show_params
+    {
+      venue: params["show"]["venue"],
+      date: params["show"]["date"],
+      time: params["show"]["time"],
+      name: params["show"]["name"],
+      link: params["show"]["link"],
+      artist: params["show"]["artist"],
+      photo: params["show"]["photo"]
     }
   end
 

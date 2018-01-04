@@ -7,6 +7,7 @@ class Shows < ActiveRecord::Migration[5.1]
       t.string :name
       t.string :link
       t.string :artist
+      t.string :photo
     end
   end
 end
