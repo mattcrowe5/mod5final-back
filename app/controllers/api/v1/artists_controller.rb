@@ -29,5 +29,5 @@ class Api::V1::ArtistsController < ApplicationController
     # rendering to the back end so the front end can take in the data
   end
 
-  
+
 end

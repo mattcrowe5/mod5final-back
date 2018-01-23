@@ -46,4 +46,20 @@ class SpotifyAdapter
 
     JSON.parse(user_response.body)
   end
+
+  def self.nilCheck(data)
+    data === nil ? a = "n/a" : a = data
+    a
+  end
+
+  def self.timeCheck(data)
+    data === nil ? a = "n/a" : a = Time.parse(data).strftime("%l %P")
+    a
+  end
+
+  def self.dateCheck(data)
+    data === nil ? a = "n/a" : a = Time.parse(data).strftime("%m/%d/%y")
+    a
+  end
+
 end
